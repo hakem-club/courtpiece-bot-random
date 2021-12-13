@@ -20,9 +20,6 @@ export type TPlayCardPayload = {
     // cards currently on the floor
     floor_cards: PlayingCard[];
 
-    // floor suite (indicated by the first card played on this round — on the floor)
-    floor_suite: PlayingCardSuite;
-
     // trump suite — as chosen by the starting player of this game
     trump_suite: PlayingCardSuite;
 
