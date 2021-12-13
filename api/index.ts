@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import RandomBot from "./bots/random";
 import HighCardBot from "./bots/highcard";
-import { PlayingCard, PlayingCardSuite } from "courtpiece-web/common/types";
+import { TPlayCardPayload, TTrumpSuitePayload } from "./types";
 
 dotenv.config();
 
@@ -19,15 +19,10 @@ ALL_BOTS.forEach(bot => {
     `/bots/${bot.identifier}`,
     express.Router()
       .post('/choose_trump_suite', (req, res) => {
-        res.json(bot.chooseTrumpSuite({
-          your_cards: req.body.your_cards! as PlayingCard[],
-        }));
+        res.json(bot.chooseTrumpSuite(req.body as TTrumpSuitePayload));
       })
       .post('/play_card', (req, res) => {
-        res.json(bot.playCard({
-          your_cards_your_can_play: req.body.your_cards_your_can_play! as PlayingCard[],
-          trump_suite: req.body.trump_suite! as PlayingCardSuite,
-        }));
+        res.json(bot.playCard(req.body as TPlayCardPayload));
       })
   );
 });
